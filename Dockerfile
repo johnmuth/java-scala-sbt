@@ -1,7 +1,7 @@
 FROM anapsix/alpine-java:8
 
-RUN apk add --no-cache --update curl nodejs nodejs-npm
-RUN npm install -g grunt-cli
+RUN apk add --no-cache --update curl nodejs nodejs-npm py-pip
+RUN npm install grunt-cli
 
 ENV SCALA_VERSION 2.11.8
 ENV SBT_VERSION 0.13.11
@@ -16,9 +16,6 @@ RUN \
 RUN curl -sL "http://dl.bintray.com/sbt/native-packages/sbt/$SBT_VERSION/sbt-$SBT_VERSION.tgz" | gunzip | tar -x -C /usr/local && \
     echo -ne "- with sbt $SBT_VERSION\n" >> /root/.built
 
+
 ENV PATH=/usr/local/sbt/bin:$PATH
-
-WORKDIR /usr/src/app
-
-RUN sbt
 
